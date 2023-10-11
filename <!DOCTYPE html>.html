@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>漢字当てゲーム</title>
+    <style>
+        #start-container {
+            text-align: center;
+            margin: 50px auto;
+        }
+        .level-button {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #game-container {
+            display: none; /* 初期は非表示 */
+            text-align: center;
+            margin: 50px auto;
+        }
+        #kanji-display {
+            font-size: 36px;
+        }
+        #input-box {
+            font-size: 24px;
+            padding: 5px;
+        }
+        #message {
+            font-size: 20px;
+        }
+        #score {
+            font-size: 20px;
+        }
+        #level-selection {
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="start-container">
+        <h1>漢字当てゲーム</h1>
+        <p>レベルを選択してください:</p>
+        <div id="level-selection">
+            <button class="level-button" onclick="startGame(1)">Level 1</button>
+            <button class="level-button" onclick="startGame(2)">Level 2</button>
+            <button class="level-button" onclick="startGame(3)">Level 3</button>
+        </div>
+    </div>
+    
+    <div id="game-container">
+        <h1>漢字当てゲーム</h1>
+        <p>漢字の読みを当てるゲームです。送り仮名は含まれません。</p>
+        <div id="kanji-display"></div>
+        <input type="text" id="input-box">
+        <p id="message"></p>
+        <p id="score">スコア: 0</p>
+    </div>
+
+    <script>
+        const kanjiLists = [
+            [ // Level 1
+                { kanji: "漢字", reading: "かんじ" },
+                { kanji: "今回", reading: "こんかい" }
+            ],
+            [ // Level 2
+                { kanji: "抽象的", reading: "ちゅうしょうてき" },
+                { kanji: "眼光", reading: "がんこう" }
+            ],
+            [ // Level 3
+                { kanji: "蝦蟇口", reading: "がまぐち" },
+                { kanji: "運転免許証", reading: "うんてんめんきょしょう" },
+                { kanji: "空覚え", reading: "うろおぼ" }
+            ]
+        ];
+
+        const kanjiDisplay = document.getElementById("kanji-display");
+        const inputBox = document.getElementById("input-box");
+        const message = document.getElementById("message");
+        const scoreDisplay = document.getElementById("score");
+        const levelSelection = document.getElementById("level-selection");
+        const startContainer = document.getElementById("start-container");
+        const gameContainer = document.getElementById("game-container");
+
+        let currentKanjiIndex = 0;
+        let currentLevel = 1;
+        let score = 0;
+
+        function startGame(level) {
+            currentLevel = level;
+            currentKanjiIndex = 0;
+            displayKanji();
+            inputBox.value = "";
+            inputBox.removeAttribute("disabled");
+            inputBox.focus();
+            message.textContent = "";
+            score = 0;
+            updateScore();
+            startContainer.style.display = "none";
+            gameContainer.style.display = "block";
+            inputBox.addEventListener("input", checkInput);
+            window.addEventListener("keyup", handleKeyUp);
+        }
+
+        function displayKanji() {
+            if (currentKanjiIndex < kanjiLists[currentLevel - 1].length) {
+                kanjiDisplay.textContent = kanjiLists[currentLevel - 1][currentKanjiIndex].kanji;
+            } else {
+                message.textContent = "ゲームクリア！ レベル" + currentLevel + "をクリアしました。";
+                inputBox.setAttribute("disabled", "disabled");
+            }
+        }
+
+        function checkInput() {
+            const typedReading = inputBox.value.trim();
+            const correctReading = kanjiLists[currentLevel - 1][currentKanjiIndex].reading;
+            if (typedReading === correctReading) {
+                score++;
+                currentKanjiIndex++;
+                if (currentKanjiIndex < kanjiLists[currentLevel - 1].length) {
+                    displayKanji();
+                    inputBox.value = "";
+                    message.textContent = "正解！次の漢字に進んでください。";
+                } else {
+                    message.textContent = "ゲームクリア！ レベル" + currentLevel + "をクリアしました。";
+                    inputBox.setAttribute("disabled", "disabled");
+                }
+                updateScore();
+            }
+        }
+
+        function updateScore() {
+            scoreDisplay.textContent = "スコア: " + score;
+        }
+
+        function handleKeyUp(event) {
+            if (event.key === "Escape") {
+                // Escキーが押された場合、ゲームを再起動
+                initialize();
+            }
+        }
+
+        initialize();
+    </script>
+</body>
+</html>
