@@ -8,19 +8,29 @@
 <body>
     <div class="container">
         <h1>漢字当てゲーム</h1>
-        <p>以下の漢字を当ててください。</p>
-        <div id="word-container">
+        <p>レベルを選択してください。</p>
+        <div id="level-buttons">
+            <button onclick="startGame(1)">レベル 1</button>
+            <button onclick="startGame(2)">レベル 2</button>
+            <button onclick="startGame(3)">レベル 3</button>
+            <button onclick="startGame(4)">レベル 4</button>
+            <button onclick="startGame(5)">レベル 5</button>
+            <button onclick="startGame(6)">レベル 6</button>
+            <button onclick="startGame(7)">レベル 7</button>
+            <button onclick="startGame(8)">レベル 8</button>
+            <button onclick="startGame(9)">レベル 9</button>
+        </div>
+    </div>
             <span id="target-word"></span>
         </div>
-        <input type="text" id="guess-input" placeholder="漢字を入力">
-        <button id="check-button">確認</button>
         <p id="result"></p>
     </div>
     <div class="updates">
         <h2>更新情報</h2>
-        <p>ver 0.0.3</p>
+        <p>ver 0.0.4</p>
         <h3>更新リスト</h3>
         <ul>
+            <li>ver0.0.4 レベルを1~9まで追加。</li>
             <li>ver0.0.3 不正解のときは、正解も表示するようにしました。</li>
             <li>ver0.0.2 バージョン情報を追加</li>
             <li>ver0.0.1 漢字ゲーム作成</li>
