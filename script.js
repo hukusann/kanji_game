@@ -46,6 +46,6 @@ checkButton.addEventListener("click", () => {
             }
         }, 2000); // 2秒後に次の問題に進む
     } else {
-        resultMessage.textContent = "不正解です。";
+        resultMessage.textContent = `不正解です。正解は、 ${correctAnswer} です。`;
     }
-});
+})
