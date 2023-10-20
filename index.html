@@ -10,7 +10,7 @@
         <h1>漢字当てゲーム</h1>
         <p>レベルを選択してください。(レベル1だけ)</p>
         <div id="level-buttons">
-            <button onclick="startGame(1)">レベル 1</button>
+            <button onclick="startGame(1)">レベル 1 (10問)</button>
             <button onclick="startGame(2)">レベル 2</button>
             <button onclick="startGame(3)">レベル 3</button>
             <button onclick="startGame(4)">レベル 4</button>
@@ -21,15 +21,19 @@
             <button onclick="startGame(9)">レベル 9</button>
         </div>
     </div>
+    <p>問題 <span id="question-number">1</span> / <span id="total-questions">10</span></p>
+            <div id="word-container"></div>
             <span id="target-word"></span>
         </div>
         <p id="result"></p>
     </div>
     <div class="updates">
         <h2>更新情報</h2>
-        <p>ver 0.0.4</p>
+        <p>ver 0.0.6</p>
         <h3>更新リスト</h3>
         <ul>
+            <li>ver0.0.6 問題を自動的にシャッフルする機能を追加しました。</li>
+            <li>ver0.0.5 レベル1の問題を8個追加。</li>
             <li>ver0.0.4 レベルを1~9まで追加。</li>
             <li>ver0.0.3 不正解のときは、正解も表示するようにしました。</li>
             <li>ver0.0.2 バージョン情報を追加</li>
